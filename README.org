@@ -19,6 +19,7 @@ timedatectl status
 #+end_src
 Be careful at this step:
 #+begin_src bash
+#Formatting Disks
 cfdisk
 #+end_src
 My personal Disk partition:
@@ -31,19 +32,25 @@ My personal Disk partition:
 
 ** Disk formatting
 #+begin_src bash
+#EFI
 mkfs.fat -F32 /dev/sda1
 
+#SWAP
 mkswap /dev/sda2
 swapon /dev/sda2
 
+#EXT4
 mkfs.ext4 /dev/sda3
 #+end_src
 ** Mount and Pacstrap
 #+begin_src bash
 mount /dev/sda3 /mnt
+
+#Installing base packages
 pacstrap /mnt base linux linux-firmware base-devel
 #+end_src
 ** Generating Fstab
+We need to generate our filesystem table
 #+begin_src bash
 genfstab -U /mnt >> /mnt/etc/fstab
 #+end_src
@@ -68,6 +75,7 @@ Look for the line #en_US.UTF-8 and uncomment
 nvim /etc/locale.gen
 #+end_src
 #+begin_src bash
+#Generate locale
 locale-gen
 #+end_src
 Just type your hostname, in my case it's 'arch'
