@@ -13,6 +13,13 @@
 - [[#exit-and-reboot][Exit and Reboot]]
 
 * Installation
+You need to make sure you have working Internet, if you are using WiFi then you need to connect your device using iwctl.
+If you are connected through a Proxy Server you need to do the following:
+#+begin_src bash
+export http_proxy=http://user:pass@proxy.direction.com:port
+export https_proxy=$http_proxy
+Once you check you have working Internet you can move forward
+#+end_src
 #+begin_src bash
 timedatectl set-ntp true
 timedatectl status
