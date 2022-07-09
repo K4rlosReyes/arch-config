@@ -1,9 +1,9 @@
 #!/bin/sh
 
 
-feh --bg-fill --no-fehbg ~/Pictures/Wallpapers/arch-black-4k.png &
+feh --bg-fill --no-fehbg ~/Pictures/Wallpapers/astronaut.jpg &
 picom &
 udiskie &
 volumeicon &
 nm-applet &
-blueman-tray &
+flameshot &
