@@ -6,3 +6,4 @@ picom &
 udiskie &
 volumeicon &
 nm-applet &
+blueman-tray &

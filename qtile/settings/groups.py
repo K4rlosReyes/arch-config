@@ -4,7 +4,7 @@ from libqtile.command import lazy
 from .keys import mod, keys
 
 groups = [Group(i) for i in [
-    "Work ", " WWW ", " Term ", "Code",
+    "Work ", " WWW ", " Term ", "Code", "Study",
 ]]
 
 for i, group in enumerate(groups):
