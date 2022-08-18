@@ -1,9 +1,5 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
-;; Place your private configuration here! Remember, you do not need to run 'doom
-;; sync' after modifying this file!
-
-
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
 (setq user-full-name "Carlos Reyes"
@@ -18,8 +14,11 @@
 
 (add-hook! 'python-mode-hook
            (pyvenv-activate "~/.ml38"))
+(add-hook! 'python-mode-hook #'tree-sitter-hl-mode)
 (setq-hook! 'python-mode-hook +format-with-lsp nil)
 
+(after! company
+  (setq company-idle-delay nil))
 ;; Doom exposes five (optional) variables for controlling fonts in Doom:
 ;;
 ;; - `doom-font' -- the primary font to use
@@ -58,14 +57,14 @@
 
 ;;; Keybins
 
-(map! :leader
-      (:prefix "n"
-       "b" #'org-roam-buffer-toggle
-       "d" #'org-roam-dailies-goto-today
-       "D" #'org-roam-dailies-goto-date
-       "i" #'org-roam-node-insert
-       "r" #'org-roam-node-find
-       "R" #'org-roam-capture))
+;; (map! :leader
+;;       (:prefix "n"
+;;        "b" #'org-roam-buffer-toggle
+;;        "d" #'org-roam-dailies-goto-today
+;;        "D" #'org-roam-dailies-goto-date
+;;        "i" #'org-roam-node-insert
+;;        "r" #'org-roam-node-find
+;;        "R" #'org-roam-capture))
 
 (advice-add #'doom-modeline-segment--modals :override #'ignore)
 
@@ -87,7 +86,7 @@
       org-roam-directory org-directory
       org-roam-db-location (concat org-directory ".org-roam.db")
       org-roam-dailies-directory "journal/"
-      org-archive-location (concat org-directory ".org/%s::")
+      org-archive-location (concat org-directory "org/%s::")
       org-agenda-files org-directory)
 
 (after! org-roam
@@ -114,87 +113,7 @@
   (add-hook 'org-roam-buffer-postrender-functions #'magit-section-show-level-2)
   (advice-add #'org-roam-backlinks-section :override #'org-roam-grouped-backlinks-section)
   (advice-add #'org-roam-node-visit :around #'+popup-save-a)
-  (advice-add #'org-roam-node-list :filter-return #'org-roam-restore-insertion-order-for-tags-a)
+  ;;(advice-add #'org-roam-node-list :filter-return #'org-roam-restore-insertion-order-for-tags-a)
   (advice-add #'org-roam-buffer-set-header-line-format :after #'org-roam-add-preamble-a))
 
 (remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-shortmenu)
-;; Whenever you reconfigure a package, make sure to wrap your config in an
-;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
-;;
-;;   (after! PACKAGE
-;;     (setq x y))
-;;
-;; The exceptions to this rule:
-;;
-;;   - Setting file/directory variables (like `org-directory')
-;;   - Setting variables which explicitly tell you to set them before their
-;;     package is loaded (see 'C-h v VARIABLE' to look up their documentation).
-;;   - Setting doom variables (which start with 'doom-' or '+').
-;;
-;; Here are some additional functions/macros that will help you configure Doom.
-;;
-;; - `load!' for loading external *.el files relative to this one
-;; - `use-package!' for configuring packages
-;; - `after!' for running code after a package has loaded
-;; - `add-load-path!' for adding directories to the `load-path', relative to
-;;   this file. Emacs searches the `load-path' when you load packages with
-;;   `require' or `use-package'.
-;; - `map!' for binding new keys
-;;
-;; To get information about any of these functions/macros, move the cursor over
-;; the highlighted symbol at press 'K' (non-evil users must press 'C-c c k').
-;; This will open documentation for it, including demos of how they are used.
-;; Alternatively, use `C-h o' to look up a symbol (functions, variables, faces,
-;; etc).
-;;
-;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
-;; they are implemented.
-
-(after! treemacs
-  (defvar treemacs-file-ignore-extensions '()
-    "File extension which `treemacs-ignore-filter' will ensure are ignored")
-  (defvar treemacs-file-ignore-globs '()
-    "Globs which will are transformed to `treemacs-file-ignore-regexps' which `treemacs-ignore-filter' will ensure are ignored")
-  (defvar treemacs-file-ignore-regexps '()
-    "RegExps to be tested to ignore files, generated from `treeemacs-file-ignore-globs'")
-  (defun treemacs-file-ignore-generate-regexps ()
-    "Generate `treemacs-file-ignore-regexps' from `treemacs-file-ignore-globs'"
-    (setq treemacs-file-ignore-regexps (mapcar 'dired-glob-regexp treemacs-file-ignore-globs)))
-  (if (equal treemacs-file-ignore-globs '()) nil (treemacs-file-ignore-generate-regexps))
-  (defun treemacs-ignore-filter (file full-path)
-    "Ignore files specified by `treemacs-file-ignore-extensions', and `treemacs-file-ignore-regexps'"
-    (or (member (file-name-extension file) treemacs-file-ignore-extensions)
-        (let ((ignore-file nil))
-          (dolist (regexp treemacs-file-ignore-regexps ignore-file)
-            (setq ignore-file (or ignore-file (if (string-match-p regexp full-path) t nil)))))))
-  (add-to-list 'treemacs-ignored-file-predicates #'treemacs-ignore-filter))
-
-(setq treemacs-file-ignore-extensions
-      '(;; LaTeX
-        "aux"
-        "ptc"
-        "fdb_latexmk"
-        "fls"
-        "synctex.gz"
-        "toc"
-        ;; LaTeX - glossary
-        "glg"
-        "glo"
-        "gls"
-        "glsdefs"
-        "ist"
-        "acn"
-        "acr"
-        "alg"
-        ;; LaTeX - pgfplots
-        "mw"
-        ;; LaTeX - pdfx
-        "pdfa.xmpi"
-        ))
-(setq treemacs-file-ignore-globs
-      '(;; LaTeX
-        "*/_minted-*"
-        ;; AucTeX
-        "*/.auctex-auto"
-        "*/_region_.log"
-        "*/_region_.tex"))
