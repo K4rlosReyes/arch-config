@@ -1,8 +1,7 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
-;; Some functionality uses this to identify you, e.g. GPG configuration, email
-;; clients, file templates and snippets. It is optional.
-(setq user-full-name "Carlos Reyes"
+;;; EXTRA
+(setq user-full-name "KR7X"
       user-mail-address "carlosreyesml18@gmail.com")
 
 (setq! evil-vsplit-window-right t
@@ -14,85 +13,50 @@
 
 (add-hook! 'python-mode-hook
            (pyvenv-activate "~/.ml38"))
-(add-hook! 'python-mode-hook #'tree-sitter-hl-mode)
 (setq-hook! 'python-mode-hook +format-with-lsp nil)
 
-(after! company
-  (setq company-idle-delay nil))
-;; Doom exposes five (optional) variables for controlling fonts in Doom:
-;;
-;; - `doom-font' -- the primary font to use
-;; - `doom-variable-pitch-font' -- a non-monospace font (where applicable)
-;; - `doom-big-font' -- used for `doom-big-font-mode'; use this for
-;;   presentations or streaming.
-;; - `doom-unicode-font' -- for unicode glyphs
-;; - `doom-serif-font' -- for the `fixed-pitch-serif' face
-;;
-;; See 'C-h v doom-font' for documentation and more examples of what they
-;; accept. For example:
-;;
-;;(setq doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light)
-;;      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
-;;
 (setq doom-font (font-spec :family "mononoki Nerd Font Mono" :size 14 :weight 'regular)
       doom-variable-pitch-font (font-spec :family "mononoki Nerd Font" :size 16))
-;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
-;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
-;; refresh your font settings. If Emacs still can't find your font, it likely
-;; wasn't installed correctly. Font issues are rarely Doom issues!
-
-;; There are two ways to load a theme. Both assume the theme is installed and
-;; available. You can either set `doom-theme' or manually load a theme with the
-;; `load-theme' function. This is the default:
 (setq doom-theme 'doom-one)
 (setq default-frame-alist '((undecorated . t)))
 (scroll-bar-mode -1)
-;; This determines the style of line numbers in effect. If set to `nil', line
-;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type nil)
 
-;; If you use `org' and don't want your org files in the default location below,
-;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/Notes/org/")
 
-;;; Keybins
+;;; KEYS
 
-;; (map! :leader
-;;       (:prefix "n"
-;;        "b" #'org-roam-buffer-toggle
-;;        "d" #'org-roam-dailies-goto-today
-;;        "D" #'org-roam-dailies-goto-date
-;;        "i" #'org-roam-node-insert
-;;        "r" #'org-roam-node-find
-;;        "R" #'org-roam-capture))
+(map! :leader
+      (:prefix "n"
+       "b" #'org-roam-buffer-toggle
+       "d" #'org-roam-dailies-goto-today
+       "D" #'org-roam-dailies-goto-date
+       "i" #'org-roam-node-insert
+       "r" #'org-roam-node-find
+       "R" #'org-roam-capture))
 
 (advice-add #'doom-modeline-segment--modals :override #'ignore)
 
-;;; :tools lsp
-;; Disable invasive lsp-mode features
+;;; LSP CONFIG
 (after! lsp-mode
   (setq lsp-enable-symbol-highlighting nil
-        ;; If an LSP server isn't present when I start a prog-mode buffer, you
-        ;; don't need to tell me. I know. On some machines I don't care to have
-        ;; a whole development environment for some ecosystems.
         lsp-enable-suggest-server-download t))
 (after! lsp-ui
-  (setq lsp-ui-sideline-enable nil  ; no more useful than flycheck
-        lsp-ui-doc-enable nil))     ; redundant with K
+  (setq lsp-ui-sideline-enable nil
+        lsp-ui-doc-enable nil))
 
-;;; ORG
-(setq +org-roam-auto-backlinks-buffer t
+;;; ORG ROAM CONFIG
+(setq +org-roam-auto-backlinks-buffer nil
       org-directory "~/Notes/"
       org-roam-directory org-directory
       org-roam-db-location (concat org-directory ".org-roam.db")
       org-roam-dailies-directory "journal/"
-      org-archive-location (concat org-directory "org/%s::")
-      org-agenda-files org-directory)
+      org-archive-location (concat org-directory ".org/%s::")
+      org-agenda-files '("~/Notes/"))
 
 (after! org-roam
   (setq org-roam-capture-templates
         `(("n" "note" plain
-           ,(format "#+title:: ${title}\n%%[%s/template/note.org]" org-roam-directory)
+           ,(format "#+title: ${title}\n%%[%s/template/note.org]" org-roam-directory)
            :target (file "note/%<%Y%m%d%H%M%S>-${slug}.org")
            :unnarrowed t)
           ("g" "gtd" plain
@@ -116,4 +80,39 @@
   ;;(advice-add #'org-roam-node-list :filter-return #'org-roam-restore-insertion-order-for-tags-a)
   (advice-add #'org-roam-buffer-set-header-line-format :after #'org-roam-add-preamble-a))
 
+;;; DASHBOARD CUSTOMIZATION
 (remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-shortmenu)
+(remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-footer)
+
+
+(defun my-weebery-is-always-greater ()
+  (let* ((banner '("KKKKKKKKK    KKKKKKKRRRRRRRRRRRRRRRRR   77777777777777777777XXXXXXX       XXXXXXX"
+                   "K:::::::K    K:::::KR::::::::::::::::R  7::::::::::::::::::7X:::::X       X:::::X"
+                   "K:::::::K    K:::::KR::::::RRRRRR:::::R 7::::::::::::::::::7X:::::X       X:::::X"
+                   "K:::::::K   K::::::KRR:::::R     R:::::R777777777777:::::::7X::::::X     X::::::X"
+                   "KK::::::K  K:::::KKK  R::::R     R:::::R           7::::::7 XXX:::::X   X:::::XXX"
+                   "  K:::::K K:::::K     R::::R     R:::::R          7::::::7     X:::::X X:::::X   "
+                   "  K::::::K:::::K      R::::RRRRRR:::::R          7::::::7       X:::::X:::::X    "
+                   "  K:::::::::::K       R:::::::::::::RR          7::::::7         X:::::::::X     "
+                   "  K:::::::::::K       R::::RRRRRR:::::R        7::::::7          X:::::::::X     "
+                   "  K::::::K:::::K      R::::R     R:::::R      7::::::7          X:::::X:::::X    "
+                   "  K:::::K K:::::K     R::::R     R:::::R     7::::::7          X:::::X X:::::X   "
+                   "KK::::::K  K:::::KKK  R::::R     R:::::R    7::::::7        XXX:::::X   X:::::XXX"
+                   "K:::::::K   K::::::KRR:::::R     R:::::R   7::::::7         X::::::X     X::::::X"
+                   "K:::::::K    K:::::KR::::::R     R:::::R  7::::::7          X:::::X       X:::::X"
+                   "K:::::::K    K:::::KR::::::R     R:::::R 7::::::7           X:::::X       X:::::X"
+                   "KKKKKKKKK    KKKKKKKRRRRRRRR     RRRRRRR77777777            XXXXXXX       XXXXXXX"
+                  ))
+         (longest-line (apply #'max (mapcar #'length banner))))
+    (put-text-property
+     (point)
+     (dolist (line banner (point))
+       (insert (+doom-dashboard--center
+                +doom-dashboard--width
+                (concat line (make-string (max 0 (- longest-line (length line))) 32)))
+               "\n"))
+     'face 'doom-dashboard-banner)))
+
+(setq +doom-dashboard-ascii-banner-fn #'my-weebery-is-always-greater)
+(add-hook! '+doom-dashboard-functions :append
+  (insert "\n" (+doom-dashboard--center +doom-dashboard--width "Pressure is a Privilege")))
