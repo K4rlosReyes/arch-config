@@ -71,15 +71,6 @@
         '(("d" "default" entry "* %?"
            :target (file+head "%<%Y-%m-%d>.org" "#+title: %<%B %d, %Y>\n\n")))))
 
-(after! org-roam
-  (add-to-list 'org-roam-completion-functions #'org-roam-complete-tag-at-point)
-  (add-hook 'org-roam-find-file-hook #'org-roam-update-slug-on-save-h)
-  (add-hook 'org-roam-buffer-postrender-functions #'magit-section-show-level-2)
-  (advice-add #'org-roam-backlinks-section :override #'org-roam-grouped-backlinks-section)
-  (advice-add #'org-roam-node-visit :around #'+popup-save-a)
-  ;;(advice-add #'org-roam-node-list :filter-return #'org-roam-restore-insertion-order-for-tags-a)
-  (advice-add #'org-roam-buffer-set-header-line-format :after #'org-roam-add-preamble-a))
-
 ;;; DASHBOARD CUSTOMIZATION
 (remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-shortmenu)
 (remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-footer)
