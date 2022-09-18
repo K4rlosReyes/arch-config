@@ -110,7 +110,7 @@
 
        :os
        ;;(:if IS-MAC macos)  ; improve compatibility with macOS
-       arch
+       ;;arch
        ;;tty               ; improve the terminal Emacs experience
 
        :lang
