@@ -45,7 +45,7 @@ def group_box(bg: str) -> widget.GroupBox:
         active=fg,
         this_current_screen_border="#51afef",
         inactive="#5b6268",
-        padding=7,
+        padding=2,
     )
 
 
@@ -67,12 +67,13 @@ def wifi(bg: str, fg: str) -> list:
             # offset=-1,
             text="直",
             x=-5,
-            padding=8,
+            padding=4,
         ),
         widget.Wlan(
             **base(bg, fg),
             format="{essid}",
             interface="wlp2s0",
+            padding=4,
         ),
     ]
 
@@ -81,6 +82,7 @@ def window_name(bg: str, fg: str) -> object:
     return widget.WindowName(
         **base(bg, fg),
         format="{name}",
+        font="mononoki Nerd Font Bold",
         max_chars=60,
         width=CALCULATED,
     )
@@ -116,7 +118,7 @@ def ram(bg: str, fg: str) -> list:
         widget.Memory(
             **base(bg, fg),
             format="{MemUsed: .0f}{mm} ",
-            padding=1,
+            padding=-7,
         ),
     ]
 
@@ -139,13 +141,6 @@ def clock(bg: str, fg: str) -> list:
     ]
 
 
-widget_defaults = dict(
-    font="mononoki Nerd Font Bold",
-    fontsize=14,
-    padding=1,
-)
-extension_defaults = widget_defaults.copy()
-
 widgets: list = [
     widget.Spacer(length=2),
     logo(bg, "#51afef"),
@@ -153,10 +148,13 @@ widgets: list = [
     group_box(bg),
     sep(bg, fg, offset=4, padding=4),
     *wifi(bg, fg),
+    sep(bg, fg, offset=4, padding=4),
+    widget.CurrentLayoutIcon(scale=0.8),
     widget.Spacer(),
     window_name(bg, fg),
     widget.Spacer(),
     *cpu(bg, fg),
+    widget.Spacer(length=8),
     *ram(bg, fg),
     sep(bg, fg),
     widget.Systray(),
