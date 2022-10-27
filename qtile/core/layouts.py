@@ -7,8 +7,7 @@ config = {
     "border_normal": "#282c34",
     "border_width": 2,
     "margin": 6,
-    "single_border_width": 0,
-    "single_margin": 10,
+    "single_margin": 6,
 }
 
 layouts = [
@@ -39,8 +38,8 @@ floating_layout = layout.Floating(
                 "makebranch",
                 "maketag",
                 "psterm",
+                "wps",
                 "ssh-askpass",
-                "pcmanfm",
                 "xfce4-about",
             ]
         ),  # type: ignore
