@@ -4,3 +4,4 @@ xrandr --output eDP-1 --mode 1366x768 --pos 1920x0 --rotate normal --output DP-1
 feh --bg-fill --no-fehbg ~/Pictures/wallpapers/wallpaper.jpg &
 picom &
 dunst &
+pa-applet &
