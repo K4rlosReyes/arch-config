@@ -45,6 +45,7 @@ floating_layout = layout.Floating(
         ),  # type: ignore
         Match(
             title=[
+                "Confirm File Replacing",
                 "branchdialog",
                 "File Operation Progress",
                 "Open File",
