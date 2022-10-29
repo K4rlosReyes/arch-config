@@ -29,6 +29,8 @@ for key in [
     ([mod, "shift"], "l", lazy.layout.shuffle_right()),
     ([mod, "shift"], "j", lazy.layout.shuffle_down()),
     ([mod, "shift"], "k", lazy.layout.shuffle_up()),
+    ([mod], "period", lazy.next_screen()),
+    ([mod], "comma", lazy.prev_screen()),
     # Increase/decrease window size
     ([mod], "i", lazy.layout.grow()),
     ([mod], "m", lazy.layout.shrink()),
