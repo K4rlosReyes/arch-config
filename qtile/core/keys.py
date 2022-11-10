@@ -39,10 +39,10 @@ for key in [
     ([mod], "o", lazy.layout.maximize()),
     ([mod], "n", lazy.layout.normalize()),
     ([mod], "w", lazy.window.kill()),
-    ([mod], "f", lazy.window.toggle_fullscreen()),
+    ([mod], "f", lazy.window.toggle_maximize()),
+    ([mod, "shift"], "f", lazy.window.toggle_fullscreen()),
     # Floating window management
     ([mod], "space", lazy.window.toggle_floating()),
-    ([mod, "shift"], "f", lazy.function(float_to_front)),
     # Toggle between layouts
     ([mod], "Tab", lazy.next_layout()),
     # Qtile management

@@ -83,7 +83,7 @@ def window_name(bg: str, fg: str) -> object:
         **base(bg, fg),
         format="{name}",
         font="mononoki Nerd Font Bold",
-        max_chars=60,
+        max_chars=30,
         width=CALCULATED,
     )
 
@@ -91,7 +91,7 @@ def window_name(bg: str, fg: str) -> object:
 def cpu(bg: str, fg: str) -> list:
     return [
         widget.TextBox(
-            **base(bg, fg),
+            **base(bg, "#51afef"),
             **iconFont(),
             # offset=20,
             text="",
@@ -108,7 +108,7 @@ def cpu(bg: str, fg: str) -> list:
 def ram(bg: str, fg: str) -> list:
     return [
         widget.TextBox(
-            **base(bg, fg),
+            **base(bg, "#51afef"),
             **iconFont(),
             # offset=-10,
             padding=5,
@@ -126,7 +126,7 @@ def ram(bg: str, fg: str) -> list:
 def clock(bg: str, fg: str) -> list:
     return [
         widget.TextBox(
-            **base(bg, fg),
+            **base(bg, "#ff6c6b"),
             **iconFont(),
             # offset=2,
             text="",
@@ -135,7 +135,7 @@ def clock(bg: str, fg: str) -> list:
         ),
         widget.Clock(
             **base(bg, fg),
-            format="%A - %I:%M %p ",
+            format="%A, %B %d - %I:%M %p ",
             padding=6,
         ),
     ]

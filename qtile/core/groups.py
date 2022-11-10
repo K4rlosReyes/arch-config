@@ -9,6 +9,8 @@ groups = [
         "www",
         "term",
         "misc",
+        "prod",
+        "xtra",
     ]
 ]
 
