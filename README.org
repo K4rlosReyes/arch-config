@@ -105,7 +105,7 @@ Just type your hostname, in my case it's 'arch'
 nvim /etc/hostname
 #+end_src
 #+begin_src bash
-nvim /etc/host
+nvim /etc/hosts
 #+end_src
 Add the next lines to the file, change 'arch' for your username
 #+begin_src bash
