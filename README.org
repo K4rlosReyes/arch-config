@@ -144,7 +144,10 @@ grub-mkconfig -o /boot/grub/grub.cfg
 * Plasma Installation
 We install our Xorg server and the Plasma DE, we also install a few useful tools.
 #+begin_src bash
+<<<<<<< HEAD
 pacman -S xorg git alacritty flameshot rhythmbox mpv emacs okular qtile qtile-extras-git ranger arandr ark bluez bluez-utils brightnessctl discord dmenu dunst htop ntfs-3g obsidian openssh openssl playerctl pipewire pipewire-alsa pipewire-pulse pipewire-jack stunnel telegram-desktop thunar unzip xorg-xinit zsh yt-dlp
+=======
+>>>>>>> e828851 (dev: Updated installation process and added new packages)
 #+end_src
 * Post install
 Make sure NetworkManager, SDDM and bluetooth are enabled
