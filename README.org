@@ -10,7 +10,7 @@
   - [[#generating-fstab][Generating Fstab]]
   - [[#localtime-locale-and-extra-config][Localtime, locale and extra config]]
 - [[#grub-installation][Grub Installation]]
-- [[#plasma-installation][Plasma Installation]]
+- [[#qtile-installation][Qtile Installation]]
 - [[#post-install][Post install]]
 - [[#exit-and-reboot][Exit and Reboot]]
 
@@ -141,18 +141,16 @@ mount /dev/sda1 /boot/EFI
 grub-install --target=x86_64-efi --bootloader-id=grub_uefi --recheck
 grub-mkconfig -o /boot/grub/grub.cfg
 #+end_src
-* Plasma Installation
-We install our Xorg server and the Plasma DE, we also install a few useful tools.
+* Qtile Installation
+We install our Xorg server and the Qtile Window Manager, we also install a few useful tools.
 #+begin_src bash
-<<<<<<< HEAD
-pacman -S xorg git alacritty flameshot rhythmbox mpv emacs okular qtile qtile-extras-git ranger arandr ark bluez bluez-utils brightnessctl discord dmenu dunst htop ntfs-3g obsidian openssh openssl playerctl pipewire pipewire-alsa pipewire-pulse pipewire-jack stunnel telegram-desktop thunar unzip xorg-xinit zsh yt-dlp
-=======
->>>>>>> e828851 (dev: Updated installation process and added new packages)
+pacman -S xorg git alacritty flameshot mpv emacs qtile qtile-extras-git ranger arandr ark bluez bluez-utils brightnessctl discord dmenu dunst htop ntfs-3g obsidian openssh openssl playerctl pipewire pipewire-alsa pipewire-pulse pipewire-jack stunnel telegram-desktop thunar unzip xorg-xinit zsh yt-dlp lightdm lightdm-gtk-greeter
 #+end_src
 * Post install
 Make sure NetworkManager, SDDM and bluetooth are enabled
 #+begin_src bash
 systemctl enable NetworkManager
+systemctl enable lightdm
 systemctl enable bluetooth
 #+end_src
 * Exit and Reboot

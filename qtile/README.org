@@ -1,0 +1,84 @@
+#+author: Carlos Reyes
+
+* Qtile Configuration
+You may find all the configuration related to Qtile in this repository, however, there are some aspects about the Window Manager itself that we need to handle ourselves.
+** Terminal
+Alacritty
+#+begin_src bash
+sudo pacman -S alacritty zsh
+#+end_src
+*** Zgenom
+#+begin_src bash
+git clone https://github.com/jandamm/zgenom.git "${HOME}/.zgenom"
+#+end_src
+** Screenshots
+Flameshot
+#+begin_src bash
+sudo pacman -S flameshot
+#+end_src
+** Compositor
+Picom
+#+begin_src bash
+sudo pacman -S picom
+#+end_src
+** Notifications system
+Dunst
+#+begin_src bash
+sudo pacman -S dunst
+#+end_src
+*** Config
+https://wiki.archlinux.org/title/Dunst
+** Icons
+Papirus Icon Theme
+#+begin_src bash
+sudo pacman -S papirus-icon-theme hicolor-icon-theme
+#+end_src
+*** Systray icons
+Use Hardcode-Tray
+#+begin_src bash
+paru -S hardcode-tray
+#+end_src
+Refer here: https://github.com/bilelmoussaoui/Hardcode-Tray
+** Sound
+We will stick to Pulseaudio + Bluez for audio and bluetooth
+#+begin_src bash
+sudo pacman -S pulseaudio pulseaudio-alsa pulseaudio-bluetooth alsa-utils
+#+end_src
+** File manager
+Ranger + Thunar
+#+begin_src bash
+sudo pacman -S ranger thunar gvfs gvfs-mtp thunar-archive-plugin thunar-volman ark unzip
+#+end_src
+** App Launcher
+Dmenu
+#+begin_src bash
+sudo pacman -S dmenu
+#+end_src
+*** Dmenu config
+** Display Manager
+Lightdm
+#+begin_src bash
+sudo pacman -S lightdm lightdm-gtk-greeter
+#+end_src
+*** Lightdm config
+** Lockscreen
+Betterlockscreen
+#+begin_src bash
+paru -S betterlockscreen
+#+end_src
+*** Config
+Refere here: https://github.com/betterlockscreen/betterlockscreen
+** Text Editor
+*** Emacs
+Emacs God btw..
+#+begin_src bash
+sudo pacman -S emacs ripgrep fd
+#+end_src
+Then we need to add the Doom Emacs patch:
+#+begin_src bash
+git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.emacs.d
+~/.emacs.d/bin/doom install
+#+end_src
+Refer here: https://github.com/doomemacs/doomemacs
+*** NeoVim
+** Fonts
