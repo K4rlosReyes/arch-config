@@ -2,12 +2,19 @@
 
 * Qtile Configuration
 You may find all the configuration related to Qtile in this repository, however, there are some aspects about the Window Manager itself that we need to handle ourselves.
+** AUR Helper
+Paru
+#+begin_src bash
+git clone https://aur.archlinux.org/paru.git
+cd paru
+makepkg -si
+#+end_src
 ** Terminal
 Alacritty
 #+begin_src bash
 sudo pacman -S alacritty zsh
 #+end_src
-*** Zgenom
+Zgenom
 #+begin_src bash
 git clone https://github.com/jandamm/zgenom.git "${HOME}/.zgenom"
 #+end_src
@@ -27,7 +34,7 @@ Dunst
 sudo pacman -S dunst
 #+end_src
 *** Config
-https://wiki.archlinux.org/title/Dunst
+Refer here: https://wiki.archlinux.org/title/Dunst
 ** Icons
 Papirus Icon Theme
 #+begin_src bash
