@@ -2,6 +2,8 @@
 
 * Qtile Configuration
 You may find all the configuration related to Qtile in this repository, however, there are some aspects about the Window Manager itself that we need to handle ourselves.
+
+IMPORTANT: ADD =exec qtile start= to your /.xinitrc/ (xorg-xinit)
 ** AUR Helper
 Paru
 #+begin_src bash
@@ -89,3 +91,10 @@ git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.emacs.d
 Refer here: https://github.com/doomemacs/doomemacs
 *** NeoVim
 ** Fonts
+Mononoki Nerd Fonts and JetBrains Mono
+#+begin_src bash
+sudo pacman -S nerd-fonts-mononoki noto-fonts-emoji
+#+end_src
+#+begin_src bash
+paru -S nerd-fonts-jetbrains-mono
+#+end_src
