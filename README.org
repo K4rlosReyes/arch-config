@@ -144,13 +144,12 @@ grub-mkconfig -o /boot/grub/grub.cfg
 * Qtile Installation
 We install our Xorg server and the Qtile Window Manager, we also install a few useful tools.
 #+begin_src bash
-pacman -S xorg git alacritty flameshot mpv emacs qtile qtile-extras-git ranger arandr ark bluez bluez-utils brightnessctl discord dmenu dunst htop ntfs-3g obsidian openssh openssl playerctl pipewire pipewire-alsa pipewire-pulse pipewire-jack stunnel telegram-desktop thunar unzip xorg-xinit zsh yt-dlp lightdm lightdm-gtk-greeter
+pacman -S xorg git alacritty flameshot mpv emacs qtile qtile-extras-git ranger arandr ark bluez bluez-utils brightnessctl discord dmenu dunst htop ntfs-3g obsidian openssh openssl playerctl pipewire pipewire-alsa pipewire-pulse pipewire-jack stunnel telegram-desktop thunar unzip xorg-xinit zsh yt-dlp 
 #+end_src
 * Post install
 Make sure NetworkManager, SDDM and bluetooth are enabled
 #+begin_src bash
 systemctl enable NetworkManager
-systemctl enable lightdm
 systemctl enable bluetooth
 #+end_src
 * Exit and Reboot
