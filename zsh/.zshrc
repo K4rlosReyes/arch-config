@@ -1,9 +1,9 @@
 export PATH="$HOME/.emacs.d/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export TMPDIR='/var/tmp'
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+#export PYENV_ROOT="$HOME/.pyenv"
+#command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+#eval "$(pyenv init -)"
 
 HISTFILE=~/.histfile
 HISTSIZE=1000
@@ -30,10 +30,15 @@ if ! zgenom saved; then
   zgenom compile "$HOME/.zshrc"
 fi
 
-alias ml="source ~/.ml38/bin/activate"
+alias ml="source ~/.venv/ml38/bin/activate"
 alias work="cd ~/Work"
 alias comm="ml && python ~/Work/python-comm/comm.py"
 
 alias wf="nmcli connection up KR7X --ask"
 alias wc="windscribe connect"
 alias wd="windscribe disconnect"
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then eval "$(pyenv init -)"
+fi
+eval "$(pyenv virtualenv-init -)"
