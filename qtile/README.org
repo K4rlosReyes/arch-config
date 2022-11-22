@@ -4,6 +4,8 @@
 You may find all the configuration related to Qtile in this repository, however, there are some aspects about the Window Manager itself that we need to handle ourselves.
 
 IMPORTANT: ADD =exec qtile start= to your /.xinitrc/ (xorg-xinit)
+** GTK and QT Theming
+
 ** AUR Helper
 Paru
 #+begin_src bash
@@ -51,7 +53,7 @@ Refer here: https://github.com/bilelmoussaoui/Hardcode-Tray
 ** Sound
 We will stick to Pulseaudio + Bluez for audio and bluetooth
 #+begin_src bash
-sudo pacman -S pulseaudio pulseaudio-alsa pulseaudio-bluetooth alsa-utils
+sudo pacman -S pulseaudio pulseaudio-alsa pulseaudio-bluetooth alsa-utils pavucontrol
 #+end_src
 ** File manager
 Ranger + Thunar
@@ -64,12 +66,6 @@ Dmenu
 sudo pacman -S dmenu
 #+end_src
 *** Dmenu config
-** Display Manager
-Lightdm
-#+begin_src bash
-sudo pacman -S lightdm lightdm-gtk-greeter
-#+end_src
-*** Lightdm config
 ** Lockscreen
 Betterlockscreen
 #+begin_src bash
