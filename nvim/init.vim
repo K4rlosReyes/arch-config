@@ -1,3 +1,4 @@
+set termguicolors
 set relativenumber
 set cursorline
 set splitbelow splitright
@@ -12,4 +13,5 @@ let g:airline_theme='onedark'
 
 call plug#begin()
    Plug 'vim-airline/vim-airline'
+   Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
