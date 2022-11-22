@@ -1,82 +1,55 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
-;;; EXTRA
+;;; Personal Info
 (setq user-full-name "KR7X"
       user-mail-address "carlosreyesml18@gmail.com")
 
+;;; Split rules
 (setq! evil-vsplit-window-right t
-      evil-split-window-below t)
+       evil-split-window-below t
+       auto-save-default t)
 
-(defadvice! prompt-for-buffer (&rest _)
-  :after '(evil-window-split evil-window-vsplit)
-  (consult-dir))
-
-(add-hook! 'python-mode-hook
-           (pyvenv-activate "~/.ml38"))
-(setq-hook! 'python-mode-hook +format-with-lsp nil)
-
-(setq doom-font (font-spec :family "mononoki Nerd Font Mono" :size 14 :weight 'regular)
+;;; Fonts settings
+(setq doom-font (font-spec :family "mononoki Nerd Font Mono" :size 15)
       doom-variable-pitch-font (font-spec :family "mononoki Nerd Font" :size 16))
-(setq doom-theme 'doom-one)
-(setq default-frame-alist '((undecorated . t)))
-(scroll-bar-mode -1)
-(setq display-line-numbers-type nil)
+
+(after! doom-themes
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t))
+(custom-set-faces!
+  '(font-lock-comment-face :slant italic)
+  '(font-lock-keyword-face :slant italic))
+
+;;; Custom
+(setq doom-theme 'doom-vibrant)
+(setq display-line-numbers-type 'relative)
+
+;;; DataScience
+(after! dap-mode
+  (setq dap-python-debugger 'debugpy))
+
+(setq org-babel-default-header-args:jupyter-python
+      '((:session . "python3")
+        (:kernel . "python3")))
 
 
-;;; KEYS
+(use-package! tree-sitter
+   :hook (prog-mode . turn-on-tree-sitter-mode)
+   :hook (tree-sitter-after-on . tree-sitter-hl-mode)
+   :config
+   (require 'tree-sitter-langs)
+   ;; This makes every node a link to a section of code
+   (setq tree-sitter-debug-jump-buttons t
+         ;; and this highlights the entire sub tree in your code
+         tree-sitter-debug-highlight-jump-region t));;; KEYS
 
-(map! :leader
-      (:prefix "n"
-       "b" #'org-roam-buffer-toggle
-       "d" #'org-roam-dailies-goto-today
-       "D" #'org-roam-dailies-goto-date
-       "i" #'org-roam-node-insert
-       "r" #'org-roam-node-find
-       "R" #'org-roam-capture))
-
-(advice-add #'doom-modeline-segment--modals :override #'ignore)
-
-;;; LSP CONFIG
-(after! lsp-mode
-  (setq lsp-enable-symbol-highlighting nil
-        lsp-enable-suggest-server-download t))
-(after! lsp-ui
-  (setq lsp-ui-sideline-enable nil
-        lsp-ui-doc-enable nil))
-
-;;; ORG ROAM CONFIG
-(setq +org-roam-auto-backlinks-buffer nil
-      org-directory "~/Notes/"
-      org-roam-directory org-directory
-      org-roam-db-location (concat org-directory ".org-roam.db")
-      org-roam-dailies-directory "journal/"
-      org-archive-location (concat org-directory ".org/%s::")
-      org-agenda-files '("~/Notes/"))
-
-(after! org-roam
-  (setq org-roam-capture-templates
-        `(("n" "note" plain
-           ,(format "#+title: ${title}\n%%[%s/template/note.org]" org-roam-directory)
-           :target (file "note/%<%Y%m%d%H%M%S>-${slug}.org")
-           :unnarrowed t)
-          ("g" "gtd" plain
-           ,(format "#+title: ${title}\n%%[%s/template/gtd.org]" org-roam-directory)
-           :target (file "gtd/%<%Y%m%d>-${slug}.org")
-           :unnarrowed t)
-          ("w" "work" plain
-           ,(format "#+title: ${title}\n%%[%s/template/work.org]" org-roam-directory)
-           :target (file "work/%<%Y%m%d>-${slug}.org")
-           :unnarrowed t))
-        org-roam-dailies-capture-templates
-        '(("d" "default" entry "* %?"
-           :target (file+head "%<%Y-%m-%d>.org" "#+title: %<%B %d, %Y>\n\n")))))
 
 ;;; DASHBOARD CUSTOMIZATION
 (remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-shortmenu)
 (remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-footer)
 
 
-(defun my-weebery-is-always-greater ()
+(defun kr7x-banner ()
   (let* ((banner '("KKKKKKKKK    KKKKKKKRRRRRRRRRRRRRRRRR   77777777777777777777XXXXXXX       XXXXXXX"
                    "K:::::::K    K:::::KR::::::::::::::::R  7::::::::::::::::::7X:::::X       X:::::X"
                    "K:::::::K    K:::::KR::::::RRRRRR:::::R 7::::::::::::::::::7X:::::X       X:::::X"
@@ -104,6 +77,4 @@
                "\n"))
      'face 'doom-dashboard-banner)))
 
-(setq +doom-dashboard-ascii-banner-fn #'my-weebery-is-always-greater)
-(add-hook! '+doom-dashboard-functions :append
-  (insert "\n" (+doom-dashboard--center +doom-dashboard--width "Pressure is a Privilege")))
+(setq +doom-dashboard-ascii-banner-fn #'kr7x-banner)
